@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: sasuke
+elasticsearch:
+  host: localhost
+  port: 9200
