@@ -1,4 +1,4 @@
-package org.cherhy.sasuke.config
+package org.cherhy.sasuke.config.property
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 
