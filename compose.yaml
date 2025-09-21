@@ -2,7 +2,8 @@ version: '3.1'
 
 services:
   elasticsearch_container:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.17.1
+    build:
+      context: .
     environment:
       - ELASTIC_PASSWORD=1234
       - discovery.type=single-node
@@ -32,3 +33,11 @@ services:
       - "9000:9000"
     depends_on:
       - elasticsearch_container
+
+  mysql_container:
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: testdb
+      MYSQL_ROOT_PASSWORD: 1234
+    ports:
+      - "3306:3306"
