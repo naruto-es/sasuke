@@ -3,7 +3,7 @@ version: '3.1'
 services:
   elasticsearch_container:
     build:
-      context: .
+      context: ./elastic-search
     environment:
       - ELASTIC_PASSWORD=1234
       - discovery.type=single-node
