@@ -8,13 +8,13 @@ import org.springframework.data.elasticsearch.annotations.FieldType
 import java.math.BigDecimal
 
 @JvmInline
-value class GoodsId(val value: Long)
+value class GoodsDocumentId(val value: Long)
 
 @Document(indexName = "goods")
 data class GoodsDocument(
     @Id
     @field:Field(type = FieldType.Long)
-    val id: GoodsId,
+    val id: GoodsDocumentId,
 
     @field:Field(type = FieldType.Keyword)
     val name: String,
