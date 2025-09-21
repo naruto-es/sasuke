@@ -1,6 +1,7 @@
 package org.cherhy.sasuke.model
 
 import org.cherhy.sasuke.config.constant.Analyzer.KOREAN_ANALYZER
+import org.springframework.data.annotation.Id
 import org.springframework.data.elasticsearch.annotations.Document
 import org.springframework.data.elasticsearch.annotations.Field
 import org.springframework.data.elasticsearch.annotations.FieldType
@@ -10,7 +11,8 @@ import java.math.BigDecimal
 value class GoodsId(val value: Long)
 
 @Document(indexName = "goods")
-data class Goods(
+data class GoodsDocument(
+    @Id
     @field:Field(type = FieldType.Long)
     val id: GoodsId,
 
