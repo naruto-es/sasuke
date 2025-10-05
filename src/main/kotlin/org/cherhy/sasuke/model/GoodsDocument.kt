@@ -2,6 +2,7 @@ package org.cherhy.sasuke.model
 
 import com.fasterxml.jackson.annotation.JsonCreator
 import org.cherhy.sasuke.common.constant.DocumentId
+import org.cherhy.sasuke.common.constant.DocumentIdGenerator
 import org.cherhy.sasuke.config.constant.Analyzer.KOREAN_ANALYZER
 import org.springframework.data.annotation.Id
 import org.springframework.data.elasticsearch.annotations.Document
@@ -15,9 +16,10 @@ value class GoodsDocumentId private constructor(val value: String) {
         require(value.matches(DocumentId.REGEX)) { DocumentId.VALIDATE_MESSAGE.format(value) }
     }
 
-    operator fun invoke(value: String) = of(value)
-
     companion object {
+        operator fun invoke() = of(DocumentIdGenerator.generate())
+        operator fun invoke(value: String) = of(value)
+
         @JvmStatic
         @JsonCreator
         fun of(value: String) = GoodsDocumentId(value.trim())
