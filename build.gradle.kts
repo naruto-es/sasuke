@@ -24,6 +24,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.20.0")
     implementation("org.flywaydb:flyway-mysql")
 
     runtimeOnly("com.mysql:mysql-connector-j")
