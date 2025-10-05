@@ -9,3 +9,8 @@ spring:
 elasticsearch:
   host: localhost
   port: 9199
+
+logging:
+  level:
+    org.springframework.data.elasticsearch: DEBUG
+    org.elasticsearch.client: DEBUG
