@@ -12,5 +12,5 @@ elasticsearch:
 
 logging:
   level:
-    org.springframework.data.elasticsearch: DEBUG
-    org.elasticsearch.client: DEBUG
+    org.springframework.data.elasticsearch: INFO
+    org.elasticsearch.client: INFO
