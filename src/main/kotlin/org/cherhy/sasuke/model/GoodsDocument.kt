@@ -30,7 +30,7 @@ value class GoodsDocumentId private constructor(val value: String) {
 @Document(indexName = "goods")
 data class GoodsDocument(
     @Id
-    @field:Field(type = FieldType.Keyword, name = DocumentId.NAME)
+    @field:Field(type = FieldType.Keyword)
     val id: GoodsDocumentId,
 
     @field:Field(type = FieldType.Keyword)
