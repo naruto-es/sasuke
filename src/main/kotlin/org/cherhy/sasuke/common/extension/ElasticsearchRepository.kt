@@ -1,15 +1,13 @@
 package org.cherhy.sasuke.common.extension
 
 import org.cherhy.sasuke.common.model.SearchResponse
-import org.cherhy.sasuke.dsl.ElasticSearchBuilder
 import org.springframework.data.domain.Pageable
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations
 import org.springframework.data.elasticsearch.core.query.CriteriaQuery
 
-inline fun <reified T, R> ElasticsearchOperations.query(
-    elasticSearchBuilder: ElasticSearchBuilder,
+inline fun <reified T> ElasticsearchOperations.search(
+    query: CriteriaQuery,
 ): SearchResponse<T> {
-    val query = CriteriaQuery(elasticSearchBuilder.rootCriteria)
     val searchHits = this.search(query, T::class.java)
     val contents: List<T> = searchHits.searchHits.map { it.content }
 
@@ -19,12 +17,11 @@ inline fun <reified T, R> ElasticsearchOperations.query(
     )
 }
 
-inline fun <reified T, R> ElasticsearchOperations.query(
-    elasticSearchBuilder: ElasticSearchBuilder,
+inline fun <reified T> ElasticsearchOperations.search(
+    query: CriteriaQuery,
     pageable: Pageable,
 ): SearchResponse<T> {
-    val query = CriteriaQuery(elasticSearchBuilder.rootCriteria).setPageable<CriteriaQuery>(pageable)
-    val searchHits = this.search(query, T::class.java)
+    val searchHits = this.search(query.setPageable<CriteriaQuery>(pageable), T::class.java)
     val contents: List<T> = searchHits.searchHits.map { it.content }
 
     return SearchResponse(
