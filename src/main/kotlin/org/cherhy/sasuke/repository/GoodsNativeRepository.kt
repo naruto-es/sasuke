@@ -4,7 +4,7 @@ import org.cherhy.sasuke.common.extension.search
 import org.cherhy.sasuke.common.model.SearchResponse
 import org.cherhy.sasuke.dsl.elasticSearch
 import org.cherhy.sasuke.model.GoodsDocument
-import org.springframework.data.elasticsearch.client.elc.ElasticsearchTemplate
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations
 import org.springframework.stereotype.Repository
 import java.math.BigDecimal
 import java.time.LocalDate
@@ -22,7 +22,7 @@ interface GoodsNativeRepository {
 
 @Repository
 class GoodsNativeRepositoryImpl(
-    private val elasticsearchTemplate: ElasticsearchTemplate,
+    private val elasticsearchOperations: ElasticsearchOperations,
 ) : GoodsNativeRepository {
     override fun findAllByCreatedAtBetween(
         startedAt: ZonedDateTime,
@@ -31,7 +31,7 @@ class GoodsNativeRepositoryImpl(
         val query = elasticSearch {
             GoodsDocument::createdAt range startedAt..endedAt
         }
-        return elasticsearchTemplate.search<GoodsDocument>(query)
+        return elasticsearchOperations.search<GoodsDocument>(query)
     }
 
     override fun findAll(
@@ -49,6 +49,6 @@ class GoodsNativeRepositoryImpl(
                 GoodsDocument::createdAt gt ZonedDateTime.now().minusYears(1)
             }
         }
-        return elasticsearchTemplate.search<GoodsDocument>(query)
+        return elasticsearchOperations.search<GoodsDocument>(query)
     }
 }
