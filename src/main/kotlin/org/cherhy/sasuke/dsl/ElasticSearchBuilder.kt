@@ -44,6 +44,7 @@ class ElasticSearchBuilder {
         rootCriteria.and(newCriteria)
     }
 
+    @JvmName("rangeZonedDateTime")
     infix fun <T : Any> KProperty1<T, ZonedDateTime>.range(range: ClosedRange<ZonedDateTime>) {
         val newCriteria = Criteria(this.name)
             .greaterThanEqual(range.start)
@@ -51,6 +52,7 @@ class ElasticSearchBuilder {
         rootCriteria.and(newCriteria)
     }
 
+    @JvmName("rangeLocalDate")
     infix fun <T : Any> KProperty1<T, ZonedDateTime>.range(range: ClosedRange<LocalDate>) {
         val newCriteria = Criteria(this.name)
             .greaterThanEqual(range.start)
