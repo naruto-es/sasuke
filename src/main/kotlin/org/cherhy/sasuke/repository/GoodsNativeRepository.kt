@@ -5,6 +5,7 @@ import org.cherhy.sasuke.common.model.SearchResponse
 import org.cherhy.sasuke.dsl.elasticSearch
 import org.cherhy.sasuke.model.GoodsDocument
 import org.springframework.data.elasticsearch.client.elc.ElasticsearchTemplate
+import org.springframework.stereotype.Repository
 import java.math.BigDecimal
 import java.time.LocalDate
 import java.time.ZonedDateTime
@@ -19,6 +20,7 @@ interface GoodsNativeRepository {
     ): SearchResponse<GoodsDocument>
 }
 
+@Repository
 class GoodsNativeRepositoryImpl(
     private val elasticsearchTemplate: ElasticsearchTemplate,
 ) : GoodsNativeRepository {
