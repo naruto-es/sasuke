@@ -1,6 +1,5 @@
 package org.cherhy.sasuke.dsl
 
-import org.cherhy.sasuke.common.model.BigDecimalRange
 import org.springframework.data.elasticsearch.core.query.Criteria
 import org.springframework.data.elasticsearch.core.query.CriteriaQuery
 import java.math.BigDecimal
@@ -37,10 +36,11 @@ class ElasticSearchBuilder {
         rootCriteria.and(newCriteria)
     }
 
-    infix fun <T : Any> KProperty1<T, BigDecimal>.range(range: BigDecimalRange) {
+    @JvmName("rangeBigDecimal")
+    infix fun <T : Any> KProperty1<T, BigDecimal>.range(range: ClosedRange<BigDecimal>) {
         val newCriteria = Criteria(this.name)
-            .greaterThanEqual(range.first)
-            .lessThanEqual(range.last)
+            .greaterThanEqual(range.start)
+            .lessThanEqual(range.endInclusive)
         rootCriteria.and(newCriteria)
     }
 
