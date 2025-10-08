@@ -9,6 +9,7 @@ import org.springframework.data.elasticsearch.annotations.Document
 import org.springframework.data.elasticsearch.annotations.Field
 import org.springframework.data.elasticsearch.annotations.FieldType
 import java.math.BigDecimal
+import java.time.ZonedDateTime
 
 @JvmInline
 value class GoodsDocumentId private constructor(val value: String) {
@@ -40,4 +41,10 @@ data class GoodsDocument(
 
     @field:Field(type = FieldType.Text, analyzer = KOREAN_ANALYZER, searchAnalyzer = KOREAN_ANALYZER)
     val description: String,
+
+    @field:Field(type = FieldType.Integer)
+    val reviewCount: Int,
+
+    @field:Field(type = FieldType.Date)
+    val createdAt: ZonedDateTime,
 )

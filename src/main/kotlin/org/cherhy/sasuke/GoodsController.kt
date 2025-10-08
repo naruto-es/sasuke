@@ -7,6 +7,7 @@ import org.cherhy.sasuke.repository.GoodsRepository
 import org.springframework.data.elasticsearch.core.RefreshPolicy
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RestController
+import java.time.ZonedDateTime
 
 @RestController
 class GoodsController(
@@ -18,7 +19,9 @@ class GoodsController(
             id = GoodsDocumentId(),
             name = "Sample Goods",
             price = 1000.toBigDecimal(),
-            description = "This is a sample goods description."
+            description = "This is a sample goods description.",
+            reviewCount = 0,
+            createdAt = ZonedDateTime.now(),
         )
 
         goodsRepository.save(dummy, RefreshPolicy.WAIT_UNTIL)
