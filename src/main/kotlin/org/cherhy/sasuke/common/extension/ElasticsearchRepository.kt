@@ -1,5 +1,6 @@
 package org.cherhy.sasuke.common.extension
 
+import org.cherhy.sasuke.common.model.SearchResponse
 import org.cherhy.sasuke.dsl.ElasticSearchBuilder
 import org.springframework.data.domain.Pageable
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations
@@ -31,8 +32,3 @@ inline fun <reified T, R> ElasticsearchOperations.query(
         totalHits = searchHits.totalHits,
     )
 }
-
-data class SearchResponse<T>(
-    val contents: List<T>,
-    val totalHits: Long,
-)
