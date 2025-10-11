@@ -18,6 +18,18 @@ inline fun <reified T> ElasticsearchOperations.search(
 }
 
 inline fun <reified T> ElasticsearchOperations.search(
+    block: () -> CriteriaQuery,
+): SearchResponse<T> {
+    val searchHits = this.search(block(), T::class.java)
+    val contents: List<T> = searchHits.searchHits.map { it.content }
+
+    return SearchResponse(
+        contents = contents,
+        totalHits = searchHits.totalHits,
+    )
+}
+
+inline fun <reified T> ElasticsearchOperations.search(
     query: CriteriaQuery,
     pageable: Pageable,
 ): SearchResponse<T> {

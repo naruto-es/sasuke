@@ -27,28 +27,28 @@ class GoodsNativeRepositoryImpl(
     override fun findAllByCreatedAtBetween(
         startedAt: ZonedDateTime,
         endedAt: ZonedDateTime,
-    ): SearchResponse<GoodsDocument> {
-        val query = elasticSearch {
-            GoodsDocument::createdAt range startedAt..endedAt
+    ) =
+        elasticsearchOperations.search<GoodsDocument> {
+            elasticSearch {
+                GoodsDocument::createdAt range startedAt..endedAt
+            }
         }
-        return elasticsearchOperations.search<GoodsDocument>(query)
-    }
 
     override fun findAll(
         priceRange: ClosedRange<BigDecimal>?,
         name: String?,
         dateRange: ClosedRange<LocalDate>?,
         descriptionContains: String?,
-    ): SearchResponse<GoodsDocument> {
-        val query = elasticSearch {
-            must {
-                priceRange?.let { GoodsDocument::price range it }
-                name?.let { GoodsDocument::name match it }
-                dateRange?.let { GoodsDocument::createdAt range dateRange }
-                descriptionContains?.let { GoodsDocument::description term it }
-                GoodsDocument::createdAt gt ZonedDateTime.now().minusYears(1)
+    ) =
+        elasticsearchOperations.search<GoodsDocument> {
+            elasticSearch {
+                must {
+                    priceRange?.let { GoodsDocument::price range it }
+                    name?.let { GoodsDocument::name match it }
+                    dateRange?.let { GoodsDocument::createdAt range it }
+                    descriptionContains?.let { GoodsDocument::description term it }
+                    GoodsDocument::createdAt gt ZonedDateTime.now().minusYears(1)
+                }
             }
         }
-        return elasticsearchOperations.search<GoodsDocument>(query)
-    }
 }
