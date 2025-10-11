@@ -11,7 +11,10 @@ enum class GoodsSort : SortType {
     ;
 
     companion object {
+        @JvmStatic
         val DEFAULT = RECOMMEND
+
+        @JvmStatic
         fun valueOfOrDefault(sortValue: String) = entries.find { it.name == sortValue } ?: DEFAULT
     }
 }
@@ -22,7 +25,10 @@ enum class UserSort : SortType {
     ;
 
     companion object {
+        @JvmStatic
         val DEFAULT = JOINED_AT
+
+        @JvmStatic
         fun valueOfOrDefault(sortValue: String) = entries.find { it.name == sortValue } ?: DEFAULT
     }
 }

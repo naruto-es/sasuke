@@ -4,11 +4,15 @@ import java.util.UUID
 
 object DocumentId {
     const val VALIDATE_VALUE: String = "{value}"
+
+    @JvmStatic
     val VALIDATE_MESSAGE = DocumentValidateMessage(
         "Elasticsearch Document ID는 영문 대소문자, 숫자, '-', '_' 문자로만 이루어져야 합니다. ${VALIDATE_VALUE}는 허용되지 않는 ID 형식입니다."
     )
 
     const val MAX_LENGTH: Int = 64
+
+    @JvmStatic
     val REGEX: Regex = "^[a-zA-Z0-9_-]{1,$MAX_LENGTH}$".toRegex()
 
     @JvmInline
@@ -18,5 +22,6 @@ object DocumentId {
 }
 
 object DocumentIdGenerator {
+    @JvmStatic
     fun generate(): String = UUID.randomUUID().toString().substring(0, DocumentId.MAX_LENGTH)
 }

@@ -9,13 +9,14 @@ import org.springframework.data.domain.Sort
 import org.springframework.data.mapping.toDotPath
 
 object ElasticsearchSortConverter {
-    fun convert(sort: SortType): List<Sort.Order> {
-        return when (sort) {
+    @JvmStatic
+    fun convert(sort: SortType): List<Sort.Order> =
+        when (sort) {
             is GoodsSort -> convertGoods(sort)
             is UserSort -> convertUser(sort)
         }
-    }
 
+    @JvmStatic
     private fun convertGoods(sort: GoodsSort): List<Sort.Order> = when (sort) {
         GoodsSort.RECOMMEND -> listOf(
             Sort.Order.desc(SCORE),
@@ -42,6 +43,7 @@ object ElasticsearchSortConverter {
         )
     }
 
+    @JvmStatic
     private fun convertUser(sort: UserSort): List<Sort.Order> = when (sort) {
         UserSort.JOINED_AT -> listOf(Sort.Order.desc("joinedAt"))
         UserSort.NAME_ASC -> listOf(Sort.Order.asc("name"))

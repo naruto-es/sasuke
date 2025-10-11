@@ -19,7 +19,10 @@ value class GoodsDocumentId private constructor(val value: String) {
     }
 
     companion object {
+        @JvmStatic
         operator fun invoke() = of(DocumentIdGenerator.generate())
+
+        @JvmStatic
         operator fun invoke(value: String) = of(value)
 
         @JvmStatic
