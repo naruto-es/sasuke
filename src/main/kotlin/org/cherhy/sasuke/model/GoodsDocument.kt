@@ -1,6 +1,7 @@
 package org.cherhy.sasuke.model
 
 import com.fasterxml.jackson.annotation.JsonCreator
+import org.cherhy.sasuke.common.constant.Document.Index
 import org.cherhy.sasuke.common.constant.DocumentId
 import org.cherhy.sasuke.common.constant.DocumentIdGenerator
 import org.cherhy.sasuke.config.constant.Analyzer.KOREAN_ANALYZER
@@ -27,7 +28,7 @@ value class GoodsDocumentId private constructor(val value: String) {
     }
 }
 
-@Document(indexName = "goods")
+@Document(indexName = Index.GOODS)
 data class GoodsDocument(
     @Id
     @field:Field(type = FieldType.Keyword)
